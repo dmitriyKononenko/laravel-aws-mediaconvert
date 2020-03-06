@@ -16,7 +16,7 @@ class CreateTranscodingJobsTable extends Migration
         Schema::create('transcoding_jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->smallInteger('status');
-            $table->json('metadata');
+            $table->json('metadata')->nullable();
             $table->unsignedInteger('video_id');
             $table->string('aws_job_id');
             $table->timestamps();
