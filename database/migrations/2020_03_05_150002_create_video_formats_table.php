@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOutputGroupTable extends Migration
+class CreateVideoFormatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateOutputGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('output_group', function (Blueprint $table) {
+        Schema::create('video_formats', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->json('config');
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateOutputGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('output_group');
+        Schema::dropIfExists('video_formats');
     }
 }

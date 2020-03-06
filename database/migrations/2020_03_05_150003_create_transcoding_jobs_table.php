@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTranscodingJobTable extends Migration
+class CreateTranscodingJobsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTranscodingJobTable extends Migration
      */
     public function up()
     {
-        Schema::create('transcoding_job', function (Blueprint $table) {
+        Schema::create('transcoding_jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->smallInteger('status');
             $table->json('metadata');
@@ -21,7 +21,7 @@ class CreateTranscodingJobTable extends Migration
             $table->string('aws_job_id');
             $table->timestamps();
 
-            $table->foreign('video_id')->references('id')->on('video');
+            $table->foreign('video_id')->references('id')->on('videos');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateTranscodingJobTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transcoding_job');
+        Schema::dropIfExists('transcoding_jobs');
     }
 }
