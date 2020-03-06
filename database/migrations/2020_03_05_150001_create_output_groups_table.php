@@ -16,6 +16,7 @@ class CreateOutputGroupsTable extends Migration
         Schema::create('output_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
             $table->json('config');
             $table->timestamps();
         });

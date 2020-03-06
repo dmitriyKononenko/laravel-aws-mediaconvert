@@ -11,6 +11,8 @@
 |
 */
 
+use App\Output;
+use App\services\MCJobBuilder;
 use Illuminate\Http\Request;
 
 function getOutputPresets(array $required_variants): array {
@@ -103,4 +105,20 @@ Route::get('/', function (Request $request) {
         };
 
     return view('welcome');
+});
+
+Route::get('test', function() {
+    $builder = new MCJobBuilder(
+        'arn:aws:mediaconvert:us-east-1:226709391673:queues/Default',
+        'role',
+        'some.file',
+        'eduvod-source-1h6392o80rgzg',
+        'Media_Convert_HLS_Test'
+    );
+
+    $outputs = Output::whereIn('id', [1, 2, 3])->get();
+
+    $builder->setOutputs($outputs);
+
+    dd($builder->build());
 });
