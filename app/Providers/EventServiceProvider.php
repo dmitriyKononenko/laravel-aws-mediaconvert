@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
+use App\Events\MediaConvertJobError;
+use App\Events\MediaConvertJobSuccess;
+use App\Listeners\MediaConvertJobErrorListener;
+use App\Listeners\MediaConvertJobSuccessListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +20,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        MediaConvertJobSuccess::class => [
+            MediaConvertJobSuccessListener::class,
+        ],
+        MediaConvertJobError::class => [
+            MediaConvertJobErrorListener::class,
         ],
     ];
 
