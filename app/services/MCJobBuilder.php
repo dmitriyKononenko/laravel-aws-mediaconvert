@@ -15,6 +15,7 @@ class MCJobBuilder
     const NAME_REPLACEMENT = '#name#';
     const OUTPUT_GROUPS_REPLACEMENT = '#output_groups#';
     const INPUT_FILE_REPLACEMENT = '#input_file#';
+    const OUTPUT_ID_INSERTION = '_OID';
 
     // Media Convert job config
     private $config = '';
@@ -66,7 +67,7 @@ class MCJobBuilder
                 "DeblockFilter": "DISABLED",
                 "DenoiseFilter": "DISABLED",
                 "TimecodeSource": "EMBEDDED",
-                "FileInput": "' . self::INPUT_FILE_REPLACEMENT .'"
+                "FileInput": "'. self::INPUT_FILE_REPLACEMENT .'"
               }
             ]
           },
@@ -118,6 +119,9 @@ class MCJobBuilder
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function build(): array
     {
         $output_groups_config = $this->buildOutputGroupsConfig();
@@ -162,7 +166,16 @@ class MCJobBuilder
      */
     private function buildOutputConfig(Collection $outputs): string
     {
-        return $outputs->pluck('config')->join(', ');
+        // Insert output id in output file name
+        return $outputs->map(function($output) {
+            $config = json_decode($output->config, true);
+
+            $insertion = self::OUTPUT_ID_INSERTION . $output->id;
+
+            $config['NameModifier'] = $config['NameModifier'] . $insertion;
+
+            return json_encode($config);
+        })->join(', ');
     }
 
     /**
@@ -174,9 +187,14 @@ class MCJobBuilder
      */
     private function buildOutputGroupConfig(OutputGroup $output_group, string $outputs_config): string
     {
+        $file_name_extension = basename($this->input_file);
+
+        $file_name = substr($file_name_extension, 0, strrpos($file_name_extension, '.'));
+
         $replacements = [
             OutputGroup::BUCKET_REPLACEMENT => $this->output_bucket,
             OutputGroup::FOLDER_REPLACEMENT => $output_group->slug,
+            OutputGroup::OUTPUT_FILE_NAME_REPLACEMENT => $file_name,
             OutputGroup::OUTPUT_REPLACEMENT => $outputs_config,
         ];
 
