@@ -32,7 +32,9 @@ class OutputGroupsSeeder extends Seeder
                 "StreamInfResolution": "INCLUDE"
               }
             }
-      }'
+      }',
+        'type' => 'HLS_GROUP',
+        'slug' => 'hls',
     ];
 
     /**

@@ -12,7 +12,7 @@ class OutputsSeeder extends Seeder
             'video_format_id' => 1,
             'config' => '
                 {
-                    "Preset": "EduVOD_Ott_Hls_Ts_Avc_Aac_16x9_480x270p_15Hz_0.4Mbps_qvbr",
+                    "Preset": "System-Ott_Hls_Ts_Avc_Aac_16x9_480x270p_15Hz_0.4Mbps",
                     "NameModifier": "_Hls_480x270"
                 }
             ',
@@ -34,8 +34,8 @@ class OutputsSeeder extends Seeder
             'video_format_id' => 3,
             'config' => '
               {
-                    "Preset": "EduVOD_Ott_Hls_Ts_Avc_Aac_16x9_1280x720p_30Hz_5.0Mbps_qvbr",
-                    "NameModifier": "_Ott_Hls_Ts_Avc_Aac_16x9_1280x720_30Hz_5.0Mbps_qvbr"
+                    "Preset": "System-Ott_Hls_Ts_Avc_Aac_16x9_1280x720p_30Hz_3.5Mbps",
+                    "NameModifier": "_Hls_1280x720"
               }
             ',
         ]
