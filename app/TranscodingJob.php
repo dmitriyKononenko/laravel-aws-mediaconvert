@@ -13,6 +13,7 @@ class TranscodingJob extends Model
     protected $fillable = [
         'status',
         'metadata',
+        'template',
         'video_id',
         'aws_job_id',
     ];

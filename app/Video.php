@@ -20,4 +20,12 @@ class Video extends Model
     {
         return $this->hasMany(TranscodingJob::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transcodedVideos()
+    {
+        return $this->hasMany(TranscodedVideo::class);
+    }
 }

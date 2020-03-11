@@ -10,6 +10,7 @@ class TranscodedVideo extends Model
         'output_id',
         'transcoding_job_id',
         's3_path',
+        'video_id',
     ];
 
     /**
@@ -26,5 +27,13 @@ class TranscodedVideo extends Model
     public function output()
     {
         return $this->belongsTo(Output::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function video()
+    {
+        return $this->belongsTo(Video::class);
     }
 }

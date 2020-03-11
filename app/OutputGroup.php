@@ -9,6 +9,7 @@ class OutputGroup extends Model
     const BUCKET_REPLACEMENT = '#bucket#';
     const FOLDER_REPLACEMENT = '#folder#';
     const OUTPUT_REPLACEMENT = '"#output#"';
+    const OUTPUT_FILE_NAME_REPLACEMENT = '#file_name#';
 
     protected $fillable = [
         'name',

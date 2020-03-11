@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Log;
 |
 */
 
-Route::post('/message', function (Request $request) {
-    $postBody = file_get_contents('php://input');
+Route::get('/videos/{id}', 'VideoController@show'); // Get single video
+Route::post('/videos/{id}/transcode', 'VideoController@transcode'); // Run transcode job for specific video
+Route::get('/videos', 'VideoController@index'); // Get videos list
+Route::post('/videos', 'VideoController@upload'); // Upload and transcode video
 
-    Log::debug($postBody);
-    return 'test';
-});
+Route::post('/sns/toggleJobSuccess', 'AwsSnsController'); // Aws SNS events endpoint
